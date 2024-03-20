@@ -403,11 +403,31 @@ This log indicates that the deployment is successful, the containers are running
 ## Configuration
 
 ### Importing Studies
+
+After having followed the above steps, an example study, Low-Grade Gliomas (UCSF, Science 2014) loaded locally. Now let's try to import another study from cBioPortal [datahub](https://github.com/cBioPortal/datahub/tree/master/public/), for example, we import TCGA-BLCA . It is available under the 'blca_tcga' name in the datahub. Navigating to that project there is a `meta_study.txt` file that needs to be checked to make sure that the name of the priject  is identical to the study id defined, there. The details are like below
+
+```bash
+type_of_cancer: blca
+cancer_study_identifier: blca_tcga
+name: Bladder Urothelial Carcinoma (TCGA, Firehose Legacy)
+short_name: Bladder (TCGA)
+description: TCGA Bladder Urothelial Carcinoma. Source data from <A HREF="http://gdac.broadinstitute.org/runs/stddata__2016_01_28/data/BLCA/20160128/">GDAC Firehose</A>. Previously known as TCGA Provisional.
+groups: PUBLIC
+```
+Then:
+
+1) Downloading the study: From the root of the `cbioportal-docker-compose` folder run `DATAHUB_STUDIES=blca_tcga ./study/init.sh`. The study should now be downloaded in ./study/, if not check wd.
+   
+2) Importing the study: To import the study by running `docker-compose exec cbioportal metaImport.py -u http://cbioportal:8080 -s study/blca_tcga/ -o`.
+
+3) Restarting the cbioportal instance:  `docker-compose restart cbioportal`  and see if the new study shows up on http://localhost:8080
+
+
 ```bash
 docker compose run cbioportal metaImport.py -u http://cbioportal:8080 -s study/lgg_ucsf_2014/ -o
 ```
 
-### Adding custome logo
+### Adding a custom logo
 
 ```bash
 docker run -v /home/usr/cbioportal-docker-compose/images/cctg_logo.png:/cbioportal-webapp/images/cctg_logo.png -p 8080:8080 cbioportal/cbioportal:5.4.7
