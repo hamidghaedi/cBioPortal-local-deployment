@@ -1,10 +1,17 @@
 # cBioPortal Local Deployment
 
-This guide walks you through the process of deploying a local instance of cBioPortal using Docker on a Windows machine, including customization and importing studies. The deployment is done within a Windows Subsystem for Linux (WSL) environment. Please note that Docker needs to be installed and running on Windows before initiating the WSL terminal.
+This guide walks you through the process of deploying a local instance of cBioPortal using Docker on a Windows machine, including customization and importing studies. The deployment is done within a Windows Subsystem for Linux (WSL) environment.
+Please note that Docker needs to be installed and running on Windows before initiating the WSL terminal.
 
 
 ## Deployment
 ### Repo Cloning
+
+My wd is as :
+```bash
+usr@LAPTOP-7A1QP0HH:~/cbioportal-docker-compose$ pwd
+/home/usr/cbioportal-docker-compose
+```
 
 The `init.sh` script initializes the setup and downloads necessary files, including seed data.
 
