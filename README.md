@@ -1,2 +1,2 @@
-# cBioPortal-local-deployment
-Steps into locall deployment of cBioPortal uisng docker on a Win machine
+# cBioPortal local deployment
+Steps into local deployment of cBioPortal using docker on a Win machine
