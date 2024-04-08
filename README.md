@@ -404,7 +404,7 @@ This log indicates that the deployment is successful, the containers are running
 
 ### Importing Studies
 
-After having followed the above steps, an example study, Low-Grade Gliomas (UCSF, Science 2014) loaded locally. Now let's try to import another study from cBioPortal [datahub](https://github.com/cBioPortal/datahub/tree/master/public/), for example, we import TCGA-BLCA . It is available under the 'blca_tcga' name in the datahub. Navigating to that project there is a `meta_study.txt` file that needs to be checked to make sure that the name of the priject  is identical to the study id defined, there. The details are like below
+After having followed the above steps, an example study, Low-Grade Gliomas (UCSF, Science 2014) loaded locally. Now let's try to import another study from cBioPortal [datahub](https://github.com/cBioPortal/datahub/tree/master/public/), for example, we import TCGA-BLCA . It is available under the 'blca_tcga' name in the datahub. Navigating to that project there is a `meta_study.txt` file that needs to be checked to make sure that the name of the project  is identical to the study ID defined, there. The details are below
 
 ```bash
 type_of_cancer: blca
