@@ -441,7 +441,7 @@ cbpManager::cbpManager(
   logDir="\\\\wsl.localhost\\Ubuntu-18.04\\home\\usr\\cbioportal-docker-compose\\study"
 )
 ```
-The above launches the Shiny application and we can start working on our study's file and prepare them for import.
+The above launches the Shiny application and we can start working on our study's files and prepare them for import.
 
 
 
