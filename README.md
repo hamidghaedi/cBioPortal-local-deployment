@@ -430,6 +430,23 @@ docker compose run cbioportal metaImport.py -u http://cbioportal:8080 -s study/l
 ```
 
 #### Importing local study
+To load a study into cBioPortal, it requires a directory containing data files, each accompanied by a corresponding meta file. 
+File Naming Rules:
+**Meta files**: Can be named anything as long as they start or end with the word "meta" (e.g., meta_test.txt, test.meta.txt, meta.test.txt).
+**Data files**: Can be named anything and are referenced in the corresponding meta file using a property called `data_filename`. 
+
+Mandatory Files:
+
+`meta_study.txt`: Meta information about the study.
+`meta_clinical.txt`: Meta file for clinical data.
+Respective clinical data file (e.g., data_clinical.txt).
+
+Optional Files:
+`meta_cancer_type.txt`: Meta file for cancer type information, which becomes mandatory if the study refers to a cancer type not already existing in the database.
+Additional meta files (e.g., for expression, mutations, CNA, etc.).
+
+
+
 To import local studies, we use [cbpManager](https://github.com/arsenij-ust/cbpManager?tab=readme-ov-file). To get this installed and configured, `remotes::install_github("arsenij-ust/cbpManager")`  and `cbpManager::setupConda_cbpManager()` for setting the Python environment. Then it needs to be provided with a path to the study folder where cBioPortal looks for studies to import them. To get the path to the study directly in WSL, running `explorer.exe .` in the WSL terminal will open a folder whose address is what the cbpManager needs to be supplied with. 
 
 So to launch and work with cbpManager in R :
