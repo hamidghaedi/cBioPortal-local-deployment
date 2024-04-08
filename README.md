@@ -404,6 +404,8 @@ This log indicates that the deployment is successful, the containers are running
 
 ### Importing Studies
 
+#### From datahub
+
 After having followed the above steps, an example study, Low-Grade Gliomas (UCSF, Science 2014) loaded locally. Now let's try to import another study from cBioPortal [datahub](https://github.com/cBioPortal/datahub/tree/master/public/), for example, we import TCGA-BLCA . It is available under the 'blca_tcga' name in the datahub. Navigating to that project there is a `meta_study.txt` file that needs to be checked to make sure that the name of the project  is identical to the study ID defined, there. The details are below
 
 ```bash
@@ -427,8 +429,19 @@ Then:
 docker compose run cbioportal metaImport.py -u http://cbioportal:8080 -s study/lgg_ucsf_2014/ -o
 ```
 
-### Adding a custom logo
+#### Importing local study
+To import local studies, we use [cbpManager](https://github.com/arsenij-ust/cbpManager?tab=readme-ov-file). To get this installed and configured, `remotes::install_github("arsenij-ust/cbpManager")`  and `cbpManager::setupConda_cbpManager()` for setting the Python environment. Then it needs to be provided with a path to the study folder where cBioPortal looks for studies to import them. To get the path to the study directly in WSL, running `explorer.exe .` in the WSL terminal will open a folder whose address is what the cbpManager needs to be supplied with. 
 
-```bash
-docker run -v /home/usr/cbioportal-docker-compose/images/cctg_logo.png:/cbioportal-webapp/images/cctg_logo.png -p 8080:8080 cbioportal/cbioportal:5.4.7
+So to launch and work with cbpManager in R :
+
+```R
+# set the path to study dir
+cbpManager::cbpManager(
+  studyDir="\\\\wsl.localhost\\Ubuntu-18.04\\home\\usr\\cbioportal-docker-compose\\study", 
+  logDir="\\\\wsl.localhost\\Ubuntu-18.04\\home\\usr\\cbioportal-docker-compose\\study"
+)
 ```
+The above launches the Shiny application and we can start working on our study's file and prepare them for import.
+
+
+
