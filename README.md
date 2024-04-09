@@ -515,66 +515,6 @@ pip3 install -r cbioportal-core/requirements.txt
 export PORTAL_HOME=/home/usr/cbioportal-docker-compose/config
 # Now lets import the created study
 cd /home/usr/cbioportal-docker-compose
-
-./cbioportal-core/src/main/resources/scripts/importer/metaImport.py  -s /home/usr/cbioportal-docker-compose/study/i240 -u http://localhost:8080 -html myReport.html -v
+docker-compose exec cbioportal metaImport.py -u http://cbioportal:8080 -s ./study/i240 -o
 ```
-The output is like :
-
-```bash
-Starting validation...
-
-DEBUG: -: Requesting info from portal at 'http://localhost:8080'
-DEBUG: -: Requesting cancer-types from portal at 'http://localhost:8080'
-DEBUG: -: Requesting genes from portal at 'http://localhost:8080'
-DEBUG: -: Requesting genesets from portal at 'http://localhost:8080'
-DEBUG: -: Requesting genesets_version from portal at 'http://localhost:8080'
-DEBUG: -: Requesting gene-panels from portal at 'http://localhost:8080'
-
-DEBUG: meta_clinical_patient.txt: Starting validation of meta file
-INFO: meta_clinical_patient.txt: Validation of meta file complete
-
-DEBUG: meta_clinical_sample.txt: Starting validation of meta file
-INFO: meta_clinical_sample.txt: Validation of meta file complete
-
-DEBUG: meta_mutations_extended.txt: Starting validation of meta file
-INFO: meta_mutations_extended.txt: Validation of meta file complete
-
-DEBUG: meta_study.txt: Starting validation of meta file
-WARNING: meta_study.txt: Unrecognized field in meta file; value encountered: 'short_name'
-INFO: meta_study.txt: Validation of meta file complete
-INFO: meta_study.txt: Setting reference genome to human (GRCh38, hg38)
-
-DEBUG: data_clinical_sample.txt: Starting validation of file
-INFO: data_clinical_sample.txt: Validation of file complete
-INFO: data_clinical_sample.txt: Read 58 lines. Lines with warning: 0. Lines with error: 0
-
-DEBUG: -: Validating case lists
-
-DEBUG: case_lists/cases_sequenced.txt: Starting validation of meta file
-INFO: case_lists/cases_sequenced.txt: Validation of meta file complete
-
-DEBUG: case_lists/cases_all.txt: Starting validation of meta file
-INFO: case_lists/cases_all.txt: Validation of meta file complete
-
-INFO: -: Validation of case list folder complete
-
-DEBUG: data_clinical_patient.txt: Starting validation of file
-INFO: data_clinical_patient.txt: Validation of file complete
-INFO: data_clinical_patient.txt: Read 25 lines. Lines with warning: 0. Lines with error: 0
-
-DEBUG: data_mutations_extended.txt: Starting validation of file
-WARNING: data_mutations_extended.txt: line 1: Including the SWISSPROT column is recommended to make sure that the UniProt canonical isoform is used when drawing Pfam domains in the mutations view
-WARNING: data_mutations_extended.txt: lines [2, 3, 4, (6430 more)]: No Amino_Acid_Change or HGVSp_Short value. This mutation record will get a generic "MUTATED" flag
-WARNING: data_mutations_extended.txt: lines [33, 47, 56, (464 more)]: Gene symbol not known to the cBioPortal instance. This record will not be loaded.; values encountered: ['ICK', 'GGTA1P', 'MRE11A', '(367 more)']
-WARNING: data_mutations_extended.txt: lines [115, 116, 117, (4681 more)]: Given value for Variant_Classification column is not one of the expected values. This can result in mapping issues and subsequent missing features in the mutation view UI, such as missing COSMIC information.; values encountered: ['intron_variant', 'downstream_gene_variant', 'synonymous_variant', '(11 more)']
-WARNING: data_mutations_extended.txt: lines [2500, 3801, 3802, (6 more)]: Hugo Symbol is not in gene or alias table and starts with a number. This can be caused by unintentional gene conversion in Excel.; values encountered: ['01-MAR', '09-SEP', '03-SEP', '(2 more)']
-INFO: data_mutations_extended.txt: Validation of file complete
-INFO: data_mutations_extended.txt: Read 6494 lines. Lines with warning: 6437. Lines with error: 0
-
-INFO: -: Validation complete
-
-
-#######################################################################
-Warnings. Please fix your files or import with override warning option
-#######################################################################
-```
+The above prints a long message with warnings, after that restart docker to see the study 
