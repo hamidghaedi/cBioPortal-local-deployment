@@ -458,7 +458,43 @@ cbpManager::cbpManager(
   logDir="\\\\wsl.localhost\\Ubuntu-18.04\\home\\usr\\cbioportal-docker-compose\\study"
 )
 ```
-The above launches the Shiny application and we can start working on our study's files and prepare them for import.
+The above launches the Shiny application and we can start working on our study's files and prepare them for import. The process of importing patient and sample data is not straightforward and require manual processing. As an alternative we can work using a text editor to create the needed files. 
+
+**data_clinical_patient.txt**:
+The first four rows of the clinical data file contain tab-delimited metadata about the clinical attributes. These rows have to start with a '#' symbol. Each of these four rows contain different type of information regarding each of the attributes that are defined in the fifth row:
+
+Row 1: The attribute Display Names: The display name for each clinical attribute
+
+Row 2: The attribute Descriptions: Long(er) description of each clinical attribute
+
+Row 3: The attribute Datatype: The datatype of each clinical attribute (must be one of: STRING, NUMBER, BOOLEAN)
+
+Row 4: The attribute Priority: A number which indicates the importance of each attribute. In the future, higher priority attributes will appear in more prominent places than lower-priority ones on relevant pages (such as the Study View). A higher number indicates a higher priority.
+
+
+The file MUST contain a patient identifier column (PATIENT_ID), which serves as a unique patient ID.
+Required columns for survival plots:
+
+OS_STATUS: Overall patient survival status, with values 1:DECEASED or 0:LIVING.
+
+OS_MONTHS: Overall survival in months since the initial diagnosis.
+
+DFS_STATUS: Disease-free status since initial treatment, with values 0:DiseaseFree or 1:Recurred/Progressed.
+
+DFS_MONTHS: Disease-free months since initial treatment.
+
+
+
+| #Patient Identifier                        	| Study Identifier 	| Sub-study Identifier 	| Best Change                                          	| Best Response             	| OS Event                  	| OS Time              	| PFS Event                 	| PFS Time                  	|
+|-------------------------------------------	|------------------	|----------------------	|------------------------------------------------------	|---------------------------	|---------------------------	|----------------------	|---------------------------	|---------------------------	|
+| #Identifier to uniquely specify a patient. 	| Trial Identifier 	| Sub-study identifier 	| Specifying  best change in tumor   size (percentage) 	| Specifying  best response 	| Indicating death or alive 	| Overal survival time 	| Specifying type of sample 	| Specifying type of sample 	|
+| #STRING                                    	| STRING           	| STRING               	| NUMBER                                               	| STRING                    	| STRING                    	| NUMBER               	| STRING                    	| NUMBER                    	|
+|# 1                                         	| 0                	| 1                    	| 1                                                    	| 1                         	| 1                         	| 1                    	| 1                         	| 1                         	|
+| PATIENT_ID                                	| STUDY_ID         	| SUBSTUDY_ID          	| BESTCHANGE                                           	| BESTRESP                  	| OS_STATUS                 	| OS_MONTH             	| DFS_STATUS                	| DFS_MONTH                 	|
+| XXX                                 	| XXX             	| XXX                	| XXX                                                 	| PD                        	| 0:LIVING                  	| 3.712526             	| 1:Recurred/Progressed     	| 1.87269                   	|
+|                                           	|                  	|                      	|                                                      	|                           	|                           	|                      	|                           	|                           	
+
+Custom attributes can be added as well, following formatting guidelines.
 
 
 
